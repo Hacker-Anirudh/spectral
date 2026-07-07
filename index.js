@@ -33,8 +33,11 @@ app.command("/spectral-help", async ({ ack, respond }) => {
     await respond({
         text:
             `Available Commands:
-/spectral-help - About Spectral!
-/spectral-spacefacts - Get a space fact!`
+/spectral-help - Help using Spectral!
+/spectral-about - About Spectral!
+/spectral-spacefacts - Get a space fact!
+/spectral-uselessfacts - Get an entirely useless fact
+/spectral-duckpic - Get a random picture of a duck`
     });
 });
 
@@ -50,6 +53,45 @@ app.command("/spectral-spacefacts", async ({ ack, respond }) => {
     } catch (e) {
         await respond({
             text: 'Failed to retrieve data, try again later.'
+        })
+    };
+
+});
+
+app.command("/spectral-uselessfacts", async ({ ack, respond }) => {
+    await ack();
+
+    try {
+        const { data } = await axios.get(`https://uselessfacts.jsph.pl/api/v2/facts/random?language=en`);
+        await respond({
+            text: data
+        })
+    } catch (e) {
+        await respond({
+            text: 'Failed to retrieve fact, try again later.'
+        })
+    };
+
+});
+
+app.command("/spectral-duckpic", async ({ ack, respond }) => {
+    await ack();
+    d, t
+    try {
+        const { data } = await axios.get(`https://random-d.uk/api/v2/random`);
+        await respond({
+            blocks: [
+                {
+                    type: "image",
+                    image_url: data.url,
+                    alt_text: "The duck picture!",
+                }
+            ],
+            text: data.message
+        })
+    } catch (e) {
+        await respond({
+            text: 'Failed to retrieve duck pic, try again later.'
         })
     };
 
