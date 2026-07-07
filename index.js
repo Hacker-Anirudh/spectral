@@ -76,7 +76,6 @@ app.command("/spectral-uselessfacts", async ({ ack, respond }) => {
 
 app.command("/spectral-duckpic", async ({ ack, respond }) => {
     await ack();
-    d, t
     try {
         const { data } = await axios.get(`https://random-d.uk/api/random`);
         await respond({
