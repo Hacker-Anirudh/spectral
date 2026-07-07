@@ -47,7 +47,11 @@ app.command("spectral-spacefacts", async ({ acke, respond }) => {
         await respond({
             text: `*${object.charAt(0).toUpperCase() + object.slice(1)}*\n${data.fact}`
         })
-    }
+    } catch (e) {
+        await respond({
+            text: 'Failed to retrieve data, try again later.'
+        })
+    };
 
 });
 
