@@ -38,9 +38,9 @@ app.command("/spectral-help", async ({ ack, respond }) => {
     });
 });
 
-app.command("spectral-spacefacts", async ({ acke, respond }) => {
+app.command("/spectral-spacefacts", async ({ ack, respond }) => {
     await ack();
-    const object = space_objects[Math.floor(Math.random * space_objects.length)]
+    const object = space_objects[Math.floor(Math.random() * space_objects.length)]
 
     try {
         const { data } = await axios.get(`https://api.bootprint.space/fact/${object}`);
