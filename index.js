@@ -37,7 +37,7 @@ app.command("/spectral-help", async ({ ack, respond }) => {
 /spectral-about - About Spectral!
 /spectral-spacefacts - Get a space fact!
 /spectral-uselessfacts - Get an entirely useless fact
-/spectral-duckpic - Get a random picture of a duck`
+/spectral-duckpic - Get a random picture of a duck for free!`
     });
 });
 
