@@ -64,7 +64,7 @@ app.command("/spectral-uselessfacts", async ({ ack, respond }) => {
     try {
         const { data } = await axios.get(`https://uselessfacts.jsph.pl/api/v2/facts/random?language=en`);
         await respond({
-            text: data
+            text: data.text
         })
     } catch (e) {
         await respond({
@@ -78,7 +78,7 @@ app.command("/spectral-duckpic", async ({ ack, respond }) => {
     await ack();
     d, t
     try {
-        const { data } = await axios.get(`https://random-d.uk/api/v2/random`);
+        const { data } = await axios.get(`https://random-d.uk/api/random`);
         await respond({
             blocks: [
                 {
