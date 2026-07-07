@@ -1,12 +1,25 @@
 require("dotenv").config();
 
 const { App } = require("@slack/bolt");
+const axios = require("axios");
 
 const app = new App({
     token: process.env.SLACK_BOT_TOKEN,
     appToken: process.env.SLACK_APP_TOKEN,
     socketMode: true
 });
+
+const space_objects = [
+    "earth",
+    "moon",
+    "mars",
+    "jupiter",
+    "saturn",
+    "mercury",
+    "venus",
+    "uranus",
+    "sun"
+];
 
 app.command("/spectral-about", async ({ command, ack, respond }) => {
     const start = Date.now();
@@ -21,8 +34,21 @@ app.command("/spectral-help", async ({ ack, respond }) => {
         text:
             `Available Commands:
 /spectral-help - About Spectral!
-/spectral-spacefact - Get a space fact`
+/spectral-spacefacts - Get a space fact!`
     });
+});
+
+app.command("spectral-spacefacts", async ({ acke, respond }) => {
+    await ack();
+    const object = space_objects[Math.floor(Math.random * space_objects.length)]
+
+    try {
+        const { data } = await axios.get(`https://api.bootprint.space/fact/${object}`);
+        await respond({
+            text: `*${object.charAt(0).toUpperCase() + object.slice(1)}*\n${data.fact}`
+        })
+    }
+
 });
 
 
